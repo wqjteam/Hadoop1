@@ -1,5 +1,7 @@
 package com.wqj;
 
+import java.net.URI;
+
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.FileSystem;
 import org.apache.hadoop.fs.Path;
@@ -7,13 +9,23 @@ import org.junit.Before;
 import org.junit.Test;
 
 
-public class HdfsClientDemo {
 
+
+/**
+ * @Description: TODO
+ * @author wqj
+ * @date 2018年3月18日 下午8:36:53 
+ */
+public class HdfsClientDemo {
+	
+	public String uri = "hdfs://192.168.1.102:9000";
+	
 	FileSystem fileSystem =null;
 	@Before
 	public void init() throws Exception {
 		Configuration conf = new Configuration();
-		fileSystem = FileSystem.get(conf);
+		System.out.println(conf);
+		fileSystem = FileSystem.get(URI.create(uri),conf);
 	}	
 	
 	@Test
