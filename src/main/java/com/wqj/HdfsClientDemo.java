@@ -21,4 +21,5 @@ public class HdfsClientDemo {
 		fileSystem.copyFromLocalFile(new Path("E:\\测试数据.zip"), new Path("/测试数据.zip"));
 		fileSystem.close();
 	}
+	
 }
