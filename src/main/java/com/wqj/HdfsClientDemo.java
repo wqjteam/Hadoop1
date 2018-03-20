@@ -31,15 +31,24 @@ public class HdfsClientDemo {
 		
 		InputStream inputStream =ClassLoader.getSystemResourceAsStream("hadoop/hadoop.properties");
 		properties.load(inputStream);
-		System.out.println(properties);
+		String	uri = properties.getProperty("uri")+":"+properties.getProperty("port");
 		Configuration conf = new Configuration();
-//		fileSystem = FileSystem.get(URI.create(uri),conf);
+		fileSystem = FileSystem.get(URI.create(uri),conf);
 	}	
 	
 	@Test
 	public void testUpload() throws Exception {
-//		fileSystem.copyFromLocalFile(new Path("E:\\测试数据.zip"), new Path("/测试数据.zip"));
-//		fileSystem.close();
+		fileSystem.copyFromLocalFile(new Path("E:\\测试数据.zip"), new Path("/测试数据.zip"));
+		fileSystem.close();
 	}
 	
+	@Test
+	public void testGet() throws Exception {
+		fileSystem.copyToLocalFile(new Path("/测试数据.zip"), new Path("F:\\测试数据.zip"));
+	}
+	
+	@Test
+	public void testDelete() throws Exception {
+		fileSystem.delete(new Path("/测试数据.zip"));
+	}
 }
