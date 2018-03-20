@@ -1,4 +1,4 @@
-package com.wqj;
+package com.wqj.hdfs;
 
 import java.io.IOException;
 import java.io.InputStream;
