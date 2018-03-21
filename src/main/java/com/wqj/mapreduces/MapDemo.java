@@ -41,7 +41,7 @@ public class MapDemo extends Mapper<LongWritable, Text, Text, IntWritable>{
 		
 		for (String word : words) {
 			//将单词作为key,  次数作为value
-			context.write(new Text(word), new IntWritable());
+			context.write(new Text(word), new IntWritable(1));
 		}
 		
 		
