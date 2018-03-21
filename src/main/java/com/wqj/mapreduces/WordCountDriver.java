@@ -20,7 +20,7 @@ public class WordCountDriver {
 	public static void main(String[] args) throws Exception {
 		Configuration configuration = new Configuration();
 
-		configuration.set("","");
+//		configuration.set("","");
 		Job job = Job.getInstance(configuration);
 
 		// job.setJar(jar);
