@@ -1,4 +1,4 @@
-package com.wqj.mapreduces;
+package com.wqj.mapreduces.numbercount;
 
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.Path;

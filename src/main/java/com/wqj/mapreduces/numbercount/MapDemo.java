@@ -1,4 +1,4 @@
-package com.wqj.mapreduces;
+package com.wqj.mapreduces.numbercount;
 
 import java.io.IOException;
 
