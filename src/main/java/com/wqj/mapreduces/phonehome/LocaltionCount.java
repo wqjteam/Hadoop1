@@ -24,9 +24,14 @@ public class LocaltionCount {
 		
 		
 		/**
-		 * 因为 要分组地区的号码  所以要应用新的 partitioner
+		 * 因为 要分组地区的号码  所以要应用新的 partitioner 筛选器
 		 * */
 		job.setPartitionerClass(LocaltionPartioner.class);
+		
+		/**
+		 *  指定一定数量的reducer  几个地区 就有几个reducer
+		 * */
+		job.setNumReduceTasks(7);
 
 		// 指定mapper输出类型
 		job.setMapOutputKeyClass(Text.class);
