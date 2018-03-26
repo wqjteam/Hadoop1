@@ -1,6 +1,7 @@
 package com.wqj.mapreduces.numbercount;
 
 import org.apache.hadoop.conf.Configuration;
+import org.apache.hadoop.fs.FileSystem;
 import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.Text;
@@ -28,7 +29,8 @@ public class WordCountDriver {
 		// 指定本业务的job要是用的map和maprducer类
 		job.setMapperClass(MapDemo.class);
 		job.setReducerClass(ReducesDemo.class);
-
+		//设置一个
+		job.setNumReduceTasks(1);
 		// 指定mapper输出类型
 		job.setMapOutputKeyClass(Text.class);
 		job.setMapOutputValueClass(IntWritable.class);
@@ -39,7 +41,15 @@ public class WordCountDriver {
 
 		// 指定job的输入原始目录
 		FileInputFormat.setInputPaths(job, new Path(args[0]));
-
+		
+		//删除其他的count
+		Path outpath = new Path(args[1]);
+		FileSystem fileSystem =FileSystem.get(configuration);
+		
+		if(fileSystem.exists(outpath)) {
+			fileSystem.delete(outpath,true);
+		}
+		
 		// 指定job的输出结果
 		FileOutputFormat.setOutputPath(job, new Path(args[1]));
 
