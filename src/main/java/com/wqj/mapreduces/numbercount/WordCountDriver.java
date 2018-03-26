@@ -42,7 +42,6 @@ public class WordCountDriver {
 		// 指定job的输入原始目录
 		FileInputFormat.setInputPaths(job, new Path(args[0]));
 		
-		
 		//删除其他的count
 		Path outpath = new Path(args[1]);
 		FileSystem fileSystem =FileSystem.get(configuration);
