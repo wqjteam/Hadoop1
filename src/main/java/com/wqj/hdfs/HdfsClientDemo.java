@@ -1,11 +1,8 @@
 package com.wqj.hdfs;
 
-import java.io.IOException;
 import java.io.InputStream;
 import java.net.URI;
 import java.util.Properties;
-
-import javax.xml.transform.SourceLocator;
 
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.FileSystem;
