@@ -17,7 +17,11 @@ import com.wqj.mapreduces.numbercount.WordCountDriver;
 public class FlowCount {
 	public static void main(String[] args) throws Exception{
 		Configuration configuration = new Configuration();
-
+		
+		configuration.set("mapreduce.framework.name", "yarn");
+		configuration.set("yarn.resourcesmanage.hostname", "master");
+		configuration.set("fs.defaultFS", "hdfs://master:9000");
+		
 //		configuration.set("","");
 		Job job = Job.getInstance(configuration);
 
