@@ -20,7 +20,7 @@ public class FlowCount {
 		
 		configuration.set("mapreduce.framework.name", "yarn");
 		configuration.set("yarn.resourcesmanage.hostname", "master");
-		configuration.set("fs.defaultFS", "hdfs://master:9000");
+//		configuration.set("fs.defaultFS", "hdfs://master:9000");
 		
 //		configuration.set("","");
 		Job job = Job.getInstance(configuration);
@@ -42,10 +42,11 @@ public class FlowCount {
 		job.setOutputValueClass(FlowBean.class);
 
 		// 指定job的输入原始目录
-		FileInputFormat.setInputPaths(job, new Path(args[0]));
+//		FileInputFormat.setInputPaths(job, new Path(args[0]));
+		FileInputFormat.setInputPaths(job, new Path("C:\\Users\\wqj\\Desktop\\11.txt"));
 
 		// 指定job的输出结果
-		FileOutputFormat.setOutputPath(job, new Path(args[1]));
+		FileOutputFormat.setOutputPath(job, new Path("C:\\Users\\wqj\\Desktop\\21.txt"));
 
 		// 将job 中配置相关参数,以及job所有java类所在的jar包,提交给yarn运行
 		// job.submit();
