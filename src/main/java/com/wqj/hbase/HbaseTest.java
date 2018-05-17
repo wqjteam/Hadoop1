@@ -7,15 +7,22 @@ import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.hbase.HBaseConfiguration;
 import org.apache.hadoop.hbase.HColumnDescriptor;
 import org.apache.hadoop.hbase.HTableDescriptor;
-import org.apache.hadoop.hbase.MasterNotRunningException;
 import org.apache.hadoop.hbase.TableName;
-import org.apache.hadoop.hbase.ZooKeeperConnectionException;
 import org.apache.hadoop.hbase.client.Connection;
 import org.apache.hadoop.hbase.client.ConnectionFactory;
 import org.apache.hadoop.hbase.client.Delete;
+import org.apache.hadoop.hbase.client.Get;
 import org.apache.hadoop.hbase.client.HBaseAdmin;
 import org.apache.hadoop.hbase.client.Put;
+import org.apache.hadoop.hbase.client.Result;
+import org.apache.hadoop.hbase.client.ResultScanner;
+import org.apache.hadoop.hbase.client.Scan;
 import org.apache.hadoop.hbase.client.Table;
+import org.apache.hadoop.hbase.filter.ColumnPrefixFilter;
+import org.apache.hadoop.hbase.filter.CompareFilter.CompareOp;
+import org.apache.hadoop.hbase.filter.RegexStringComparator;
+import org.apache.hadoop.hbase.filter.RowFilter;
+import org.apache.hadoop.hbase.filter.SingleColumnValueExcludeFilter;
 import org.apache.hadoop.hbase.util.Bytes;
 import org.junit.After;
 import org.junit.Before;
@@ -69,6 +76,7 @@ public class HbaseTest {
 	
 	@Test
 	public void insertData() throws Exception {
+		
 		Put put = new Put(Bytes.toBytes("zhangsanfen")); //列 row
 		put.add(Bytes.toBytes("info1"), Bytes.toBytes("name"), Bytes.toBytes("zhangsan"));
 		put.add(Bytes.toBytes("info1"), Bytes.toBytes("age"), Bytes.toBytes("18"));
@@ -84,6 +92,104 @@ public class HbaseTest {
 		table.delete(delete);
 		
 	}
+	
+	@Test
+	public void queryDate() throws Exception {
+		Get get = new Get(Bytes.toBytes("zhangsanfen"));
+		
+		System.out.println(table.get(get));
+	}
+	
+	@Test
+	public void scanData() throws Exception {
+		
+		Scan scan=new Scan();
+		ResultScanner scanner = table.getScanner(scan);
+		for (Result result : scanner) {
+			System.out.println(result);
+		}
+	}
+	
+	/**
+	 * 过滤器扫描表:列值过滤器
+	 * */
+	@Test
+	public void scanDataByFilter() throws Exception {
+		//创建过滤器
+		SingleColumnValueExcludeFilter singleColumnValueExcludeFilter = new SingleColumnValueExcludeFilter(Bytes.toBytes("info1"), Bytes.toBytes("name"), CompareOp.EQUAL,  Bytes.toBytes("zhangsan"));
+		Scan scan = new Scan();
+		scan.addColumn(Bytes.toBytes("info1"), Bytes.toBytes("name"));
+		scan.setFilter(singleColumnValueExcludeFilter);
+		ResultScanner scanner = table.getScanner(scan);
+		for (Result result : scanner) {
+			System.out.println(result);;
+			
+		}
+		
+		
+		
+	}
+	
+	/**
+	 * 过滤器扫描表:列前缀过滤器
+	 * */
+	public void scanDataByFilter3() throws Exception {
+		ColumnPrefixFilter columnPrefixFilter=new ColumnPrefixFilter(Bytes.toBytes("name"));
+		Scan scan=new Scan();
+		scan.setFilter(columnPrefixFilter);
+		
+		
+		
+		
+		
+	}
+	
+	/**
+	 * 过滤器扫描表:rowkey过滤器(重点)
+	 * */
+	public void scanDataByFilter2() throws Exception {
+		RowFilter filter=new RowFilter(CompareOp.EQUAL, new RegexStringComparator("^wang"));
+		Scan scan=new Scan();
+		scan.setFilter(filter);
+		ResultScanner scanner = table.getScanner(scan);
+		
+		
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	@After
 	public void close() throws Exception {
