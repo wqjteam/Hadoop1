@@ -27,7 +27,7 @@ public class StormWordCount {
         //shuffleGrouping随机分发
         topologyBuilder.setBolt("mybolt1",new MySplitBolt(),10).shuffleGrouping("mySpout");
         //fieldsGrouping按照word分发
-        topologyBuilder.setBolt("mybolt2",new MyCountBolt(),2).fieldsGrouping("mybolt1",new Fields("word"));
+        topologyBuilder.setBolt("mybolt2",new MyCountBolt(),1).fieldsGrouping("mybolt1",new Fields("word"));
 
         //2.创建一个config 用来定义当前的topology,需要的worker数量
         Config config = new Config();

@@ -37,7 +37,7 @@ public class MyCountBolt extends BaseRichBolt {
         }else{
             map.put(word,number);
         }
-        System.out.println("count"+map);
+        System.out.println("======================================count"+map);
     }
 
     //描述方法

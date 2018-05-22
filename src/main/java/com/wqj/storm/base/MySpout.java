@@ -41,7 +41,7 @@ public class MySpout extends BaseRichSpout {
      */
     public void nextTuple() {
         //输出到下一次 bolt
-        collector.emit(new Values("i am wqj is body"));
+        collector.emit(new Values("i am wqj is body ss ss sssa weq qweq weq qwe ewq weq eqwe ewq eqw ad das ads" ));
     }
 
     public void declareOutputFields(OutputFieldsDeclarer declarer) {
