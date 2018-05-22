@@ -124,7 +124,7 @@
                     </descriptorRefs>
                     <archive>
                         <manifest>
-                            <mainClass>com.wqj.storm.StormWordCount.main</mainClass>
+                            <mainClass>com.wqj.storm.base.StormWordCount.main</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
