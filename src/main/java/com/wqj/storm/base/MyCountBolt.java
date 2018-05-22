@@ -1,4 +1,4 @@
-package com.wqj.storm;
+package com.wqj.storm.base;
 
 import org.apache.storm.task.OutputCollector;
 import org.apache.storm.task.TopologyContext;
