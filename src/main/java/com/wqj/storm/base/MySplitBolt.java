@@ -2,9 +2,6 @@ package com.wqj.storm.base;
 
 import org.apache.storm.task.OutputCollector;
 import org.apache.storm.task.TopologyContext;
-import org.apache.storm.topology.IBasicBolt;
-import org.apache.storm.topology.IRichBolt;
-import org.apache.storm.topology.IWindowedBolt;
 import org.apache.storm.topology.OutputFieldsDeclarer;
 import org.apache.storm.topology.base.BaseRichBolt;
 import org.apache.storm.tuple.Fields;
