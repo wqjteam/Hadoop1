@@ -48,4 +48,5 @@ public class MySpout extends BaseRichSpout {
         //作为声明
         declarer.declare(new Fields("aaa"));
     }
+
 }
