@@ -9,5 +9,6 @@ public class KafkaConsumer extends Thread {
     @Override
     public void run() {
         super.run();
+
     }
 }
