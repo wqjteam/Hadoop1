@@ -11,6 +11,7 @@ import backtype.storm.topology.TopologyBuilder;
 public class KafkaAndStorm {
     public static void main(String[] args) {
         TopologyBuilder builder = new TopologyBuilder();
-        builder.setSpout("kafkaS",new KafkaSpout(),1);
+        builder.setSpout("kafkaSpout",new KafkaSpout(),1);
+//        builder.setBolt("kbolt1",new Kfa)
     }
 }
