@@ -1,7 +1,7 @@
 package com.wqj.storm.apitemplate;
 
+import kafka.producer.Partitioner;
 import org.apache.kafka.clients.producer.ProducerRecord;
-import org.apache.kafka.clients.producer.internals.Partitioner;
 import org.apache.kafka.common.Cluster;
 
 /**
@@ -9,9 +9,10 @@ import org.apache.kafka.common.Cluster;
  * @Date: 2018/5/28 17:40
  * @Description:
  */
-public class MyPartitoner extends Partitioner {
-    @Override
-    public int partition(ProducerRecord<byte[], byte[]> record, Cluster cluster) {
-        return super.partition(record, cluster);
+public class MyPartitoner implements Partitioner {
+
+
+    public int partition(Object o, int i) {
+        return 0;
     }
 }
