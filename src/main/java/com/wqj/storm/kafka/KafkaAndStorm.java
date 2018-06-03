@@ -25,16 +25,10 @@ public class KafkaAndStorm {
     public static void main(String[] args) throws AlreadyAliveException, InvalidTopologyException {
         BrokerHosts brokerHosts = new ZkHosts("master:2181,slave1:2181,slave2:2181");
 
-        SpoutConfig spoutConfig = new SpoutConfig(brokerHosts, "test", "", "kafkaspout");
+        SpoutConfig spoutConfig = new SpoutConfig(brokerHosts, "test", "", "spout");
 
-        List<String> zkServers = new ArrayList<String>() ;
-        zkServers.add("master");
-        zkServers.add("slave1");
-        zkServers.add("slave2");
-        spoutConfig.zkServers = zkServers;
-        spoutConfig.zkPort = 2181;
-        spoutConfig.socketTimeoutMs = 60 * 1000 ;
-        spoutConfig.scheme = new SchemeAsMultiScheme(new StringScheme()) ;
+//        spoutConfig.socketTimeoutMs = 60 * 1000 ;
+//        spoutConfig.scheme = new SchemeAsMultiScheme(new StringScheme()) ;
         //自定义的转换
 //        spoutConfig.scheme = new SchemeAsMultiScheme(new MessageScheme());
 
@@ -43,23 +37,24 @@ public class KafkaAndStorm {
         TopologyBuilder builder = new TopologyBuilder();
 
         Config conf = new Config();
-        Map<String, String> map = new HashMap<String, String>();
+            conf.setNumWorkers(1);
 
-        map.put("metadata.broker.list", "master:9092,slave1:9092,slave2:9092");
-        map.put("serializer.class", "kafka.serializer.StringEncoder");
-        conf.put("kafka.broker.properties", map);
-        conf.put("topic", "test");
+        //本地模式保存offset
+//        spoutConfig.zkServers = new ArrayList<String>(){{
+//            add("master");
+//            add("slave1");
+//            add("slave2");
+//        }};
+        spoutConfig.zkPort = 2181;
 
         builder.setSpout("spout", new KafkaSpout(spoutConfig));
         builder.setBolt("bolt", new MykafkaBolt1(),1).shuffleGrouping("spout");
 
 
         if (args != null && args.length > 0) {
-            conf.setNumWorkers(1);
             StormSubmitter.submitTopology(args[0], conf, builder.createTopology());
         } else {
             // 这里是本地模式下运行的启动代码。
-            conf.setMaxTaskParallelism(1);
             LocalCluster cluster = new LocalCluster();
             cluster.submitTopology("simple", conf, builder.createTopology());
         }
