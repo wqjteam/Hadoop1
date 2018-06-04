@@ -5,6 +5,8 @@ import kafka.javaapi.producer.Producer;
 import kafka.producer.KeyedMessage;
 import kafka.producer.ProducerConfig;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Properties;
 import java.util.UUID;
 
@@ -65,7 +67,8 @@ public class KafkaProducer extends Thread{
              */
 //            producer.send(new KeyedMessage<String, String>(TOPIC, messageNo + "", "appid" + UUID.randomUUID() + "哈哈哈"));
             //不指定分区
-            producer.send(new KeyedMessage<String, String>(TOPIC,  "appid" + UUID.randomUUID() + "哈哈哈"));
+            SimpleDateFormat sdf=new SimpleDateFormat(" yyyy-MM-dd HH:mm:ss");
+            producer.send(new KeyedMessage<String, String>(TOPIC,  "appid" + UUID.randomUUID() + "哈哈哈时间:"+sdf.format(new Date())));
             System.out.println("发送:"+messageNo+"条");
 
         }

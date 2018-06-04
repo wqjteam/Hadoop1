@@ -41,16 +41,16 @@ public class KafkaConsumer extends Thread {
                     "Consumer: [%s],  Topic: [%s],  PartitionId: [%d], Offset: [%d], msg: [%s]",
                     title, topic, partition, offset, msg));
         }
-        System.out.println(String.format("Consumer: [%s] exiting ...", title));
+        System.out.println(String.format("Consumer: [%s] 线程退出 ...", title));
     }
 
     public static void main(String[] args) throws Exception {
         Properties props = new Properties();
         props.put("group.id", "sqout");
         props.put("zookeeper.connect", "master:2181,slave1:2181,slave2:2181");
-        props.put("auto.offset.reset", "largest");
-        props.put("auto.commit.interval.ms", "1000");
-        props.put("partition.assignment.strategy", "roundrobin");
+//        props.put("auto.offset.reset", "largest");
+//        props.put("auto.commit.interval.ms", "1000");
+//        props.put("partition.assignment.strategy", "roundrobin");
         ConsumerConfig config = new ConsumerConfig(props);
         String topic1 = "test";
         //只要ConsumerConnector还在的话，consumer会一直等待新消息，不会自己退出
@@ -63,7 +63,7 @@ public class KafkaConsumer extends Thread {
         //取出 `kafkaTest` 对应的 streams
         List<KafkaStream<byte[], byte[]>> streams = topicStreamsMap.get(topic1);
         //创建一个容量为4的线程池
-        ExecutorService executor = Executors.newFixedThreadPool(1);
+        ExecutorService executor = Executors.newFixedThreadPool(3);
         //创建20个consumer threads
         for (int i = 0; i < streams.size(); i++)
             executor.execute(new KafkaConsumer("消费者" + (i + 1), streams.get(i)));
