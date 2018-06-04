@@ -5,6 +5,7 @@ import org.apache.kafka.clients.consumer.ConsumerRecords;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
 
 import java.util.Arrays;
+import java.util.Map;
 import java.util.Properties;
 
 /**
@@ -25,10 +26,11 @@ public class ConsumerDemo {
         properties.put("value.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");
 
         org.apache.kafka.clients.consumer.KafkaConsumer<String, String> kafkaConsumer = new KafkaConsumer<String, String>(properties);
-        kafkaConsumer.subscribe(Arrays.asList("HelloWorld"));
+        kafkaConsumer.subscribe("HelloWorld");
         while (true) {
-            ConsumerRecords<String, String> records = kafkaConsumer.poll(100);
-            for (ConsumerRecord<String, String> record : records) {
+//            Map<String, ConsumerRecords<String, String>> poll = kafkaConsumer.poll(100);
+            Map<String, ConsumerRecords<String, String>> poll = kafkaConsumer.poll(100);
+            for (ConsumerRecords<String, String> record : poll.get("test")) {
                 System.out.printf("offset = %d, value = %s", record.offset(), record.value());
                 System.out.println();
             }
