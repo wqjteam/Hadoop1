@@ -53,7 +53,6 @@ public class KafkaConsumer extends Thread {
         props.put("partition.assignment.strategy", "roundrobin");
         ConsumerConfig config = new ConsumerConfig(props);
         String topic1 = "test";
-        String topic2 = "paymentMq";
         //只要ConsumerConnector还在的话，consumer会一直等待新消息，不会自己退出
         ConsumerConnector consumerConn = Consumer.createJavaConsumerConnector(config);
         //定义一个map
@@ -64,7 +63,7 @@ public class KafkaConsumer extends Thread {
         //取出 `kafkaTest` 对应的 streams
         List<KafkaStream<byte[], byte[]>> streams = topicStreamsMap.get(topic1);
         //创建一个容量为4的线程池
-        ExecutorService executor = Executors.newFixedThreadPool(3);
+        ExecutorService executor = Executors.newFixedThreadPool(1);
         //创建20个consumer threads
         for (int i = 0; i < streams.size(); i++)
             executor.execute(new KafkaConsumer("消费者" + (i + 1), streams.get(i)));
