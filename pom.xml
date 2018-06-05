@@ -101,7 +101,7 @@
             <version>${hbase.version}</version>
         </dependency>
         <!-- hbase end -->
-
+        <!-- storm start -->
         <dependency>
             <groupId>com.alibaba.jstorm</groupId>
             <artifactId>jstorm-core</artifactId>
@@ -118,8 +118,8 @@
                 </exclusion>
             </exclusions>
         </dependency>
-
-
+        <!-- storm end -->
+        <!--kafka  start-->
         <dependency>
             <groupId>org.apache.kafka</groupId>
             <artifactId>kafka_2.10</artifactId>
@@ -163,7 +163,7 @@
                 </exclusion>
             </exclusions>
         </dependency>
-
+        <!--kafka  end-->
     </dependencies>
 
     <!--构建的时候,打包-->
