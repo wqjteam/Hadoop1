@@ -69,3 +69,5 @@ public class KafkaConsumer extends Thread {
             executor.execute(new KafkaConsumer("消费者" + (i + 1), streams.get(i)));
     }
 }
+
+
