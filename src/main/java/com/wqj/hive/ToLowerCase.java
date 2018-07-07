@@ -9,4 +9,9 @@ public class ToLowerCase extends UDF{
 		
 		return lowerCase;
 	}
+
+	public  String evaluate(int phone){
+
+		return phone+"hahah";
+	}
 }
