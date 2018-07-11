@@ -14,7 +14,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <user.version>2.6.4</user.version>
         <hive.version>1.2.1</hive.version>
-        <hbase.version>1.4.3</hbase.version>
+        <phoenix.version>4.14.0-HBase-1.2</phoenix.version>
     </properties>
 
     <dependencies>
@@ -89,18 +89,17 @@
             <version>${hive.version}</version>
         </dependency>
         <!-- hive end -->
-        <!-- hbase client -->
+
+        <!-- hbase 集成phoenix-->
+        <!-- https://mvnrepository.com/artifact/org.apache.phoenix/phoenix-core -->
         <dependency>
-            <groupId>org.apache.hbase</groupId>
-            <artifactId>hbase-server</artifactId>
-            <version>${hbase.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.hbase</groupId>
-            <artifactId>hbase-client</artifactId>
-            <version>${hbase.version}</version>
+            <groupId>org.apache.phoenix</groupId>
+            <artifactId>phoenix-core</artifactId>
+            <version>${phoenix.version}</version>
         </dependency>
         <!-- hbase end -->
+
+
         <!-- storm start -->
         <dependency>
             <groupId>com.alibaba.jstorm</groupId>
@@ -119,6 +118,8 @@
             </exclusions>
         </dependency>
         <!-- storm end -->
+
+
         <!--kafka  start-->
         <dependency>
             <groupId>org.apache.kafka</groupId>
