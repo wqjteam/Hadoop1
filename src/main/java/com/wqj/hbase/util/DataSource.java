@@ -11,7 +11,7 @@ import java.sql.SQLException;
  * @Description: 使用phoenix操作hbase
  */
 public class DataSource {
-    public Connection GetConnection(){
+    public static Connection getConnection(){
         Connection cc = null;
         String driver = "org.apache.phoenix.jdbc.PhoenixDriver";
         String url = "jdbc:phoenix:hadoop1:2181";
