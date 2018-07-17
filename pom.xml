@@ -90,14 +90,6 @@
         </dependency>
         <!-- hive end -->
 
-        <!-- hbase 集成phoenix-->
-        <!-- https://mvnrepository.com/artifact/org.apache.phoenix/phoenix-core -->
-        <dependency>
-            <groupId>org.apache.phoenix</groupId>
-            <artifactId>phoenix-core</artifactId>
-            <version>${phoenix.version}</version>
-        </dependency>
-        <!-- hbase end -->
 
 
         <!-- storm start -->
